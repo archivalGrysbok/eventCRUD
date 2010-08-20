@@ -1,0 +1,171 @@
+@charset "UTF-8";
+/**
+ * "Yet Another Multicolumn Layout" - (X)HTML/CSS framework
+ * (en) central stylesheet
+ * (de) zentrales Stylesheet
+ *
+ * @creator       YAML Builder V1.2 (http://builder.yaml.de)
+ * @file          my_layout.css
+ * @-yaml-minver  3.2
+ * 
+ */
+
+/* import core styles | Basis-Stylesheets einbinden */
+@import url(../yaml/core/base.css);
+
+/* import screen layout | Screen-Layout einbinden */
+@import url(../yaml/navigation/nav_slidingdoor.css);
+@import url(screen/basemod.css);
+@import url(screen/content.css);
+
+/* import print layout | Druck-Layout einbinden */
+@import url(../yaml/print/print_draft.css);
+
+/* Things I've edited */
+
+.required th {background-color:pink}
+
+.required th:before {content: "*"}
+
+#header {background-repeat:no-repeat}
+
+#nav ul { margin-right: 20px; }
+
+.hlist ul {
+	float:right;
+  }
+
+h1 { font-size:1.5em; margin: 0 0 0}
+h2 { font-size:1.2em;  margin: 0 0 0}
+h3 { font-size:1em;  margin: 0 0 0}
+
+article h1 { font-size:1.5em; margin: 0 0 0}
+article h2 { font-size:1.2em;  margin: 0 0 0}
+article h3 { font-size:1em;  margin: 0 0 0}
+
+hr {	clear:left;}
+
+h1, h2, h3, h4, h5, h6 {font-family: Helvetica, sans-serif;}
+
+.narrow_event_list header .timeloc {float: left;clear:both;}
+
+.box{
+	border:1px solid #999;
+	margin:0 0 1em 0;
+    overflow:hidden;
+    padding:.8em;
+}
+.box p,
+.box ul,
+.box ol,
+.box div.cont,
+.box form {
+	/*margin:.5em;*/
+	clear:both;
+	text-align:justify;
+}
+
+.box header h1,
+.box header h2,
+.box header h3,
+.box header h4,
+.box header h5,
+.box header h6 {
+/*	background-color:#73A0C5;*/
+	display:block;
+/*	padding:0 5px;*/
+/*	color:white;*/
+	float:left;
+	}
+
+.timestamp{
+	float:right;
+}
+
+/*
+.box header a{
+	padding:0 5px;
+	padding-top:5px;
+ 	float:right;
+	clear:none;
+	font-style:italic;
+	}
+	*/
+
+.box header .timeloc {float: right;	padding-top: 0 px; font-style:italic;}
+
+header h1,
+header h2,
+header h3,
+header h4,
+header h5,
+header h6 {
+/*	background-color:#73A0C5;*/
+	display:block;
+/*	padding:0 5px;*/
+/*	color:white;*/
+	float:left;
+	clear:left;
+	}
+
+header .timeloc {float: right; font-style:italic; text-align:right;}
+
+#narrow_event_list header .timeloc {
+	float: left; 
+	font-style:italic; 
+	text-align:left; 
+	clear:both;
+	}
+
+article p,
+article ul,
+article ol,
+article div.cont,
+article form {
+	clear:left;
+	text-align:justify;
+}
+
+article p:last-child {
+	margin:0;
+}
+
+#event_list {
+	margin-bottom:black;
+/*	border-bottom:1px solid #999;*/
+
+}
+
+.errorlist {font-size: 12px !important;
+    display: block;
+    padding: 4px 5px 4px 25px;
+    margin: 0 0 3px 0;
+    border: 1px solid red;
+    color: white;
+    background: red url(../img/admin/icon_alert.gif) 5px .3em no-repeat;
+ }
+
+.clearleft {clear:left;}
+
+/*
+body {
+background: none #B5D045 !important;
+}
+*/
+
+/*
+dark blue:184D68
+blue:31809F
+peach:FB9C6C
+brick:D55121
+green:CFE990
+lightgreen:EAFBC5
+
+
+Blue #389090
+Pink #F47E7D
+Green #B5D045
+Orange #FB8335
+Light blue #81C0C5
+Tan #E0C7A8
+*/

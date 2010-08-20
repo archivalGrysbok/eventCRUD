@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 41
+/svn/larpresume_main/!svn/ver/59/larpsite
+END
+manage.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/larpresume_main/!svn/ver/1/larpsite/manage.py
+END
+search_sites.py
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/larpresume_main/!svn/ver/15/larpsite/search_sites.py
+END
+views.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/larpresume_main/!svn/ver/32/larpsite/views.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/larpresume_main/!svn/ver/1/larpsite/__init__.py
+END
+settings.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/larpresume_main/!svn/ver/53/larpsite/settings.py
+END
+urls.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/larpresume_main/!svn/ver/50/larpsite/urls.py
+END

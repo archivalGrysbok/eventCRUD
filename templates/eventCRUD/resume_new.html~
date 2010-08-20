@@ -1,0 +1,54 @@
+{% extends "base_data.html" %}
+
+{% block header %}
+	{{ resumeUser.userProfile }}'s Larp Resumeffdfsd
+{% endblock header %}
+
+{% block title %}
+{{ resumeUser.userProfile }}'s Larp Resumeddf
+{% endblock %}
+
+{% block subhead %}
+{{ resumeUser.userProfile }}'s Larp Resumeffd
+{% endblock subhead %}
+
+{% block content %}
+
+<h1>{{ resumeUser.userProfile }}'s Larp Resume<h1>
+
+{% if cast_list %}
+	{% regroup cast_list by type as type_list %}
+	{% for type in type_list %}
+		<h1>{{type.grouper}}</h1>
+			<ul>
+			{% for item in type.list %}
+			{% ifchanged item.cast.run.startdate|date:'Y' %} 
+			</ul>
+			<h2>{{ item.cast.run.startdate|date:'Y' }}</h2>
+			<ul>
+			{% endifchanged %}
+			<li><a href="{{ item.cast.run.get_absolute_url }}">{{ item.cast.run }}</a>
+			{% if type.grouper == "Played" %}
+				{% if item.show %}
+				as <a href="{{item.cast.character.get_absolute_url}}">{{item.cast.get_name}}</a>
+				{% endif %}
+			{% endif %}
+			</li>
+			{% endfor %}
+			</ul>
+	{% endfor %}
+{% endif %}
+
+{% if author_list %}
+	<h1>Written</h1>
+		<ul>
+		{% for item in author_list %}
+			<li>
+			<a href="{{ item.larp.get_absolute_url }}">{{ item.larp }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}
+</dl>
+{% endblock content %}
+

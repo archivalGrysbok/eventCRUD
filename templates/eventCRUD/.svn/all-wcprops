@@ -1,0 +1,113 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/larpresume_main/!svn/ver/46/templates/eventCRUD
+END
+series_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/larpresume_main/!svn/ver/21/templates/eventCRUD/series_detail.html
+END
+run_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/larpresume_main/!svn/ver/36/templates/eventCRUD/run_add.html
+END
+character_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/larpresume_main/!svn/ver/36/templates/eventCRUD/character_detail.html
+END
+larp_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/larpresume_main/!svn/ver/36/templates/eventCRUD/larp_detail.html
+END
+userProfile_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/larpresume_main/!svn/ver/39/templates/eventCRUD/userProfile_detail.html
+END
+role_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/larpresume_main/!svn/ver/32/templates/eventCRUD/role_detail.html
+END
+run_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/larpresume_main/!svn/ver/39/templates/eventCRUD/run_detail.html
+END
+larp_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/larpresume_main/!svn/ver/40/templates/eventCRUD/larp_list.html
+END
+userProfile_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/larpresume_main/!svn/ver/32/templates/eventCRUD/userProfile_list.html
+END
+run_list.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/larpresume_main/!svn/ver/36/templates/eventCRUD/run_list.html
+END
+resume.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/larpresume_main/!svn/ver/45/templates/eventCRUD/resume.html
+END
+con_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/larpresume_main/!svn/ver/32/templates/eventCRUD/con_detail.html
+END
+cast_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/larpresume_main/!svn/ver/32/templates/eventCRUD/cast_add.html
+END
+role_include.html
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/larpresume_main/!svn/ver/32/templates/eventCRUD/role_include.html
+END
+convention_detail.html
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/larpresume_main/!svn/ver/32/templates/eventCRUD/convention_detail.html
+END
+search.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/larpresume_main/!svn/ver/18/templates/eventCRUD/search.html
+END
+larp_add.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/larpresume_main/!svn/ver/36/templates/eventCRUD/larp_add.html
+END
+resume_new.html
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/larpresume_main/!svn/ver/46/templates/eventCRUD/resume_new.html
+END

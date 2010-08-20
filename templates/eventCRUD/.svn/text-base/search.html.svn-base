@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add a Run
+{% endblock %}
+
+{% block subhead %}
+{% endblock subhead %}
+
+{% block content %}
+
+
+{% endblock %}
+
+{% block sidebar %}
+<pre>
+filters, dependant on which pulldown is selected
+
+runs:
+   convention
+   location
+   past/future
+   played in
+
+larps:
+   author
+   last ran
+   played
+   
+sort by:
+   title
+   last ran
+   rating
+
+</pre>
+{% endblock sidebar %}

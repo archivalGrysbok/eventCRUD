@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+Thank you for your feedback
+
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock sidebar %}

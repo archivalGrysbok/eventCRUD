@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+					{% block navigation %}
+						<li class="active" href="/home/"><strong>Home</strong></li>
+						<li><a href="#">My Stuff</a></li>
+						<li><a href="/ec/search/">Games</a></li>
+						<li><a href="#">People</a></li>
+						<li><a href="#">Forums</a></li>
+					{% endblock navigation %}

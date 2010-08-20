@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/larpresume_main/!svn/ver/46/templates
+END
+base_my.html
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/larpresume_main/!svn/ver/1/templates/base_my.html
+END
+base_home.html
+K 25
+svn:wc:ra_dav:version-url
+V 57
+/svn/larpresume_main/!svn/ver/20/templates/base_home.html
+END
+base_data.html
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/larpresume_main/!svn/ver/1/templates/base_data.html
+END
+base.html
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/larpresume_main/!svn/ver/39/templates/base.html
+END
+base_userOnly.html
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/svn/larpresume_main/!svn/ver/1/templates/base_userOnly.html
+END

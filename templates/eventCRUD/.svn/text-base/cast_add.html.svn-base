@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+I was in "{{run.larp}}"
+{% endblock %}
+
+{% block content %}
+
+<form method="post" action="">
+ 
+<h1>I 
+{% if run.in_past%} was {% else %} will be {% endif %}
+in the {{ run.startdate }} run of <a href="{{run.get_absolute_url}}">"{{ run }}"</a> at {{run.get_location}}</h1>
+
+{% csrf_token %}
+    {{ form.as_p }}
+<p><input type="submit" value="Add to larp resume" /></p>
+</form>
+
+<a>Character not listed?</a>
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock sidebar %}

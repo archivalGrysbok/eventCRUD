@@ -1,0 +1,5 @@
+Required:
+
+django-notification
+django-messages
+

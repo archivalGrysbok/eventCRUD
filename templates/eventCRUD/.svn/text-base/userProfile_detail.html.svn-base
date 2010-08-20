@@ -1,0 +1,44 @@
+{% extends "base_home.html" %}
+
+{% block title %}
+{{aUser.get_profile}}'s Profile
+{% endblock %}
+
+{% block header %}
+	{{aUser.get_profile}}'s Profile
+{% endblock header %}
+
+{% block subhead %}
+
+{% endblock subhead %}
+
+{% block content %}
+
+<!--
+<table>
+	{% csrf_token %}
+		{{ form.as_table }}
+</table>
+<p><input type="submit" value="Update Profile" /></p>
+</form>
+-->
+
+
+{% endblock %}
+
+{% block sidebar %}
+<ul>
+<li>
+<a href="./resume/">LARP Resume</a></li>
+
+{% ifequal aUser.username user.username %}
+	<li><a href="/accounts/password/change">Change Password</a></li>
+	<li><a href="/messages/inbox/">Message Inbox</a></li>
+
+{% else %}{% if user.is_authenticated %}
+	<li><a href="/messages/compose/{{aUser.username}}">Send {{aUser.username}} a message</a></li>
+	{% endif %}
+{% endifequal %}
+
+</ul>
+{% endblock sidebar %}

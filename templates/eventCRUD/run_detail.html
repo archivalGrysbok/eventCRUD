@@ -1,0 +1,136 @@
+{% extends "base_home.html" %}
+
+{% load markup %}
+
+
+{% block title %}
+  {{ run }} {% if run.tentative %}(tentative){% endif %}
+{% endblock %}
+
+{% block subhead %}
+{% endblock subhead %}
+
+
+{% block content %}
+	<article itemscope itemtype="http://data-vocabulary.org/Event">
+		<h1 itemprop="summary">Run: {{ run.name }}</h1>
+		{% if run.tentative %}<i>(tentative)</i>{% endif %}
+		<dl>
+		{% if run.url %}<dt>Homepage</dt><dd itemprop="url">{{ run.url|default:""|urlize }}</dd>{% endif %}
+		<dt>LARP</dt><dd><a href="{{run.larp.get_absolute_url}}">{{ run.larp }}</a> </dd>
+		<dt>Date</dt><dd>
+			{% if run.startdate %}<time itemprop="startDate" datetime="{{run.startdate|date:'c'}}" 
+				{% if run.is_past %}
+					title="{{run.startdate|timesince}} ago"
+				{% else %}
+					title="in {{run.startdate|timeuntil}}"
+				{% endif %}
+				>
+				{{ run.startdate|date }}</time>
+				{% if run.time_given %}
+					@ {{ run.starttime|time }}
+				{% endif %}
+				{% if run.enddate %}
+					{% if run.enddate.date != run.startdate.date %}
+						<time itemprop="startDate" datetime="{{run.enddate}}"> to {{ run.enddate|date }}</time>
+						{% if run.timegiven %}@ {{ run.enddate|time }}
+						{% endif %}
+					{% endif %}
+				{% else %}
+				{% endif %}
+			{% else %}
+				{% if run.tentative %}<i>to be determined</i>
+				{% else %}
+				not listed
+				{% endif %}
+			{% endif %}
+		</dd>
+		{% if run.convention %}<dt>Convention</dt><dd itemprop="description"><p><a href="{{run.convention.get_absolute_url}}">{{ run.convention|default:"" }}</a></p></dd>{% endif %}
+		{% if run.location %}<dt>Location</dt><dd><span itemprop="location">{{ run.location|default:"" }}</span></dd>{% endif %}
+		{% if run.description %}<dt>Description</dt><dd itemprop="description">{{ run.description|restructuredtext }}</dd>
+		{% else %}
+			{% if run.larp.summary %}<dt>Description</dt><dd itemprop="description">{{ run.larp.summary|restructuredtext }}</dd>
+			{% else %}
+				{% if run.larp.description %}<dt>Description</dt><dd itemprop="description">{{ run.larp.description|restructuredtext }}</dd>{% endif %}
+			{% endif %}
+		{% endif %}
+		</dl>
+	</article>
+
+{% if run.larp in userProfile.get_larps or run.larp.spoilerability = 'un' %}
+	{% if userProfile %}
+		<h2>Comments:</h2>
+			{% load comments %}
+			{% render_comment_list for run %}
+		<h2>Leave a comment</h2>
+		<dl>
+		<dd>
+		{% get_comment_form for run as form %}
+			<form action="{% comment_form_target %}" method="POST">  {% csrf_token %}
+		{{ form.comment }} 
+		<span style="display:none;">Do not enter anything in this field {{ form.honeypot }} </span>
+		{{ form.content_type }} 
+		{{ form.object_pk }} 
+		{{ form.timestamp }} 
+		{{ form.security_hash }} <br>
+		<input type="submit" value="Add comment" id="id_submit" />
+		</form> 
+		</dd>
+		</dl>
+	{% endif %}
+{% endif %}
+
+
+{% endblock %}
+
+{% block sidebar %}
+{% if gm_list %}
+	<h1>GM</h1>
+	<ul>
+	{% for gm in gm_list %}
+		<li><a href="{{gm.user.userProfile.get_absolute_url}}">{{gm}}</a></li>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+{% if npc_list %}
+	<h1>NPC</h1>
+	<ul>
+	{% for npc in npc_list %}
+		<li><a href="{{npc.user.userProfile.get_absolute_url}}">{{npc}}</a></li>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+
+{% if player_list %}
+	<h1>Players</h1>
+	<ul>
+	{% for player in player_list %}
+		<li><a href="{{player.user.get_profile.get_absolute_url}}">{{player}}</a>
+		{% include "eventCRUD/role_include.html" %}
+		</li>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+{% if userProfile %}
+
+<form method="post" action="/run/{{run.id}}/npc_add/">
+{% csrf_token %}
+    {{ npc_form.as_p }}
+<p><input type="submit" value="I NPCed" /></p>
+</form>
+
+<form method="post" action="/run/{{run.id}}/gm_add/">
+{% csrf_token %}
+    {{ gm_form.as_p }}
+<p><input type="submit" value="I GMed" /></p>
+</form>
+
+<FORM METHOD="LINK" ACTION="/run/{{run.id}}/add_cast/">
+<INPUT TYPE="submit" VALUE="I PCed">
+</FORM>
+{% endif %}
+
+{% endblock sidebar %}

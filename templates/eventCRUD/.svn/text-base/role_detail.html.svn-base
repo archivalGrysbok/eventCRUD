@@ -1,0 +1,45 @@
+{% extends "base_home.html" %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block subhead %}
+{% endblock subhead %}
+
+{% block content %}
+
+<dl>
+	<article>
+		<h1>
+		
+		{% if role.larp in userProfile.get_larps %}
+			{{role.name}}
+		{% else %}
+			{% if role.larp.spoilerability != 'ch' %}
+				{{role.name}}
+			{% else %}
+				[role name redacted]
+			{% endif %}
+		{% endif %}
+				
+		</h1>
+		<dt>LARP</dt><dd><a href="{{role.larp.get_absolute_url}}">{{ role.larp }}</a> </dd>
+	</article>
+	
+
+</dl>
+{% endblock %}
+
+{% block sidebar %}
+
+	{% if player_list %}
+		<dt>Played by</dt>
+		{% for player in player_list %}
+			<dd><a href="{{player.userProfile.get_absolute_url}}">{{player}}</a>
+				as {% include "eventCRUD/role_include.html" %}
+				</dd>
+		{% endfor %}
+	{% endif %}
+
+{% endblock sidebar %}

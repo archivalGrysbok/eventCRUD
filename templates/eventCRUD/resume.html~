@@ -1,0 +1,64 @@
+{% extends "base_data.html" %}
+
+{% block header %}
+	{{ username.userProfile }}'s Larp Resume
+{% endblock header %}
+
+{% block title %}
+{{ username.userProfile }}'s Larp Resume
+{% endblock %}
+
+{% block subhead %}
+{{ username.userProfile }}'s Larp Resumesdf
+{% endblock subhead %}
+
+{% block content %}
+
+<h1>{{ username.userProfile }}'s Larp Resume<h1>
+
+{% if player_list %}
+	<h1>Played</h1>
+	<ul>
+	{% regroup player_list by run.startdate.year as date_list %}
+	{% for date in date_list %}
+		<h2>{{ date.grouper|default:"Unknown Date"}}</h2>
+		{% for player in date.list %}
+			<li><a href="{{ player.run.get_absolute_url }}">{{ player.run }}</a>
+				{% include "eventCRUD/role_include.html" %}
+			</li>
+		{% endfor %}<br>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+{% if npc_list %}
+	<h1>NPCed</h1>
+	<ul>
+	{% for item in npc_list %}
+		<li><a href="{{ item.run.get_absolute_url }}">{{ item.run }}</a></li>
+	{% endfor %}
+	</ul>
+{% endif %}
+
+{% if gm_list %}
+	<h1>GMed</h1>
+	<ul>
+		{% for item in gm_list %}
+			<li><a href="{{ item.run.get_absolute_url }}">{{ item.run }}</a></li>
+		{% endfor %}
+	</ul>
+{% endif %}
+
+{% if author_list %}
+	<h1>Written</h1>
+		<ul>
+		{% for item in author_list %}
+		<li>
+		<a href="{{ item.larp.get_absolute_url }}">{{ item.larp }}</a>
+		</li>
+	</ul>
+	{% endfor %}
+{% endif %}
+</dl>
+{% endblock content %}
+
