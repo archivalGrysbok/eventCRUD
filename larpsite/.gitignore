@@ -1,0 +1,4 @@
+Rakefile
+settings.py
+settings.py~
+*.pyc
