@@ -23,6 +23,8 @@
 
 /* Things I've edited */
 
+.shared {background-color:pink}
+
 .required th {background-color:pink}
 
 .required th:before {content: "*"}
@@ -142,7 +144,7 @@ article p:last-child {
     margin: 0 0 3px 0;
     border: 1px solid red;
     color: white;
-    background: red url(../img/admin/icon_alert.gif) 5px .3em no-repeat;
+/*    background: red url(../img/admin/icon_alert.gif) 5px .3em no-repeat;*/
  }
 
 .clearleft {clear:left;}
