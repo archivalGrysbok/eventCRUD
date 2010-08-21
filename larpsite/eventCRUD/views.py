@@ -1,30 +1,19 @@
-from django.views.generic.simple import direct_to_template, HttpResponseRedirect
-from django.views.generic.list_detail import object_detail
-from django.views.generic import list_detail
-from django.core.context_processors import csrf
-from django.template import RequestContext
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-
-from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.http import HttpResponseRedirect
-from django.shortcuts import render_to_response
-
-from django.shortcuts import get_object_or_404, render_to_response
-
-from eventCRUD.models import Run, Larp, Player, NPC, GM, Author, UserProfile, LarpSeries, Convention, Character
-from eventCRUD.forms import LarpForm, RunForm, PlayerForm, GmForm, NpcForm, UserProfileForm
-
-
-from django.template import Context, loader, TemplateDoesNotExist
-from django.contrib.auth.models import User
-from larpsite.eventCRUD.models import Run
-from django.http import HttpResponse, Http404, HttpResponseRedirect
-from django.views.generic.simple import direct_to_template
-from django.shortcuts import get_object_or_404, render_to_response
-from django.views.generic import list_detail
 from datetime import datetime
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.core.context_processors import csrf
+from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django import forms
+from django.shortcuts import get_object_or_404, render_to_response
+from django.template import Context, loader, TemplateDoesNotExist, RequestContext
+from django.views.generic import list_detail
+from django.views.generic.list_detail import object_detail
+from django.views.generic.simple import direct_to_template, HttpResponseRedirect
+
+from eventCRUD.forms import LarpForm, RunForm, PlayerForm, GmForm, NpcForm, UserProfileForm
+from eventCRUD.models import Run, Larp, Player, NPC, GM, Author, UserProfile, LarpSeries, Convention, Character
+from larpsite.eventCRUD.models import Run
 
 # Create your views here.
 
@@ -248,58 +237,6 @@ def npc_add(request, object_id):
 			run=form.save()
 			return HttpResponseRedirect(aNPC.run.get_absolute_url())
 	return HttpResponseRedirect(run.get_absolute_url())
-
-def resume_return(request,userprofile,my):
-	"""
-	FIXME
-	@param request:
-	@type request:
-	@param userprofile:
-	@type userprofile:
-	@param my:
-	@type my:
-	"""
-	try:
-		userProfile = UserProfile.objects.get(pk=request.user.id)
-		
-	except:
-		userProfile = None
-	return list_detail.object_list( 
-		request,
-		queryset = userprofile.user.player_set.order_by("run__startdate"),
-		template_name = "eventCRUD/resume.html",
-		extra_context = {'my': my,
-		'gm_list': userprofile.user.gm_set.order_by("run__startdate"),
-		'npc_list': userprofile.user.npc_set.order_by("run__startdate"),
-		'author_list': userprofile.user.author_set.all(),
-		'username':userprofile.user,
-		'player_list':userprofile.user.player_set.order_by("run__startdate"),
-		'userProfile':userProfile,
-		},
-	)
-
-def resume(request, username):
-	"""
-	FIXME
-	@param request:
-	@type request:
-	@param username:
-	@type username:
-	"""
-	my=0
-	user = User.objects.get(username=username)
-	userProfile = get_object_or_404(UserProfile, pk=user.id)
-	return resume_return(request,userProfile,my)
-
-#			list.append(item.run.larp)
-#		for item in playerSet:
-#			if item.run.is_past:
-#				list.append(item.run.larp)
-#			else:
-#				pass
-#		for item in authorSet:
-#			list.append(item.larp)		
-#		return list
 
 def resume_new(request, username):
 	"""

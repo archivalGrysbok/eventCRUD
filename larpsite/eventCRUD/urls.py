@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail, date_based
 from django.views.generic.simple import direct_to_template
-from eventCRUD.views import run_detail, larp_detail, larp_add, run_add, run_add_cast, resume, character_detail, search, series_detail, con_detail, user_detail, gm_add, npc_add, resume_new, myhome
+from eventCRUD.views import run_detail, larp_detail, larp_add, run_add, run_add_cast,  character_detail, search, series_detail, con_detail, user_detail, gm_add, npc_add, resume_new, myhome
 from eventCRUD.models import Run, Larp, UserProfile
 from django.template.defaultfilters import slugify
 from django.views.generic.simple import direct_to_template
