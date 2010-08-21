@@ -2,16 +2,14 @@
 
 {% load markup %}
 
-
 {% block title %}
-
 {% endblock %}
 
 {% block subhead %}
 {% endblock subhead %}
 
 {% block content %}
-	
+
 <ul>
 {% for item in userProfile_list %}
 <li><a href="{{item.get_absolute_url}}">{{item}}</a></li>
@@ -22,9 +20,4 @@
 
 {% block sidebar %}
 
-<!--
-{% if userProfile %}
-<a href="/ec/run/{{run.id}}/add_cast/">I participated in this run </a>
-{% endif %}
--->
 {% endblock sidebar %}
