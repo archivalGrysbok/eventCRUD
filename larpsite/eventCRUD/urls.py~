@@ -23,7 +23,7 @@ larp_info = {
 people_info = {
 	'queryset': UserProfile.objects.all(),
 	'template_object_name': 'userProfile',
-#	'template_name':'eventCRUD/userProfile_list.html'
+	'template_name':'eventCRUD/userProfile_list.html'
 }
 
 #con_info = {
