@@ -1,0 +1,8 @@
+Rakefile
+settings.py
+settings.py~
+*.pyc
+search_sites.py
+.svn
+larpsite.db
+manage.py

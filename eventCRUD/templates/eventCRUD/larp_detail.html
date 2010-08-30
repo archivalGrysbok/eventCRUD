@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% load markup %}
+
+{% block title %}
+{{ larp }}
+{% endblock %}
+
+{% block subhead %}
+{% endblock subhead %}
+
+{% block content %}
+	<article>
+		<hgroup>
+			<h1>Larp: {{ larp.title }}</h1>
+			{% if larp.subtitle %}<h2>{{ larp.subtitle }}</h2>{% endif %}
+		</hgroup>		
+		<dl>
+		{% if author_list %}<dt>Author</dt><dd><span>
+		
+		{% for item in author_list%}
+			{% if not forloop.first %}
+				{% if forloop.last%} and 
+				{% else %}
+				, 
+				{% endif %}
+			{% endif %}
+			{% if item.userProfile %}<a href="{{item.userProfile.get_absolute_url}}">			
+			{{item}}
+			</a>
+			{% else %}
+			{{item}}
+			{% endif %}
+		{% endfor%}
+		
+		</span></dd>{% endif %}
+		{% if larp.larpseries %}<dt>{{larp.larpseries.get_type_display|capfirst}}</dt><dd><a href="{{larp.larpseries.get_absolute_url}}">{{ larp.larpseries.name|default:"" }}</a></dd>{% endif %}
+		{% if larp.url %}<dt>Homepage</dt><dd>{{ larp.url|default:"" }}</dd>{% endif %}
+		{% if larp.summary %}<dt>Summary</dt><dd><span>{{ larp.summary|default:"" }}</span></dd>{% endif %}
+		{% if larp.description %}<dt>Description</dt><dd>{{ larp.description|restructuredtext }}</dd>{% endif %}
+		<dt>Spoilerability</dt><dd>{{larp.get_spoilerability_display}}</dd>
+		{% if larp.length %}<dt>Length</dt><dd>{{ larp.get_length }}</dd>{% endif %}
+		{% if larp.minsize or larp.maxsize %}
+		<dt>Size</dt>
+			<dd> 
+			{% ifequal larp.minsize larp.maxsize %}
+				{{ larp.minsize }} players
+			{% else %}
+				{% if larp.minsize and larp.maxsize %}
+					{{ larp.minsize }} to {{ larp.maxsize }} players
+				{% else %}
+					{% if larp.minsize %}
+						{{ larp.minsize }}-player minimum
+					{% endif %}
+					{% if larp.maxsize %}
+						{{ larp.maxsize }}-player maximum
+					{% endif %}
+				{% endif %}
+			{% endifequal %}
+		</dd>
+		{% endif %}
+		
+		{% if role_list%}
+			<dt>Characters</dt>
+			{% for item in role_list %}
+				{% if item.spoiler %}
+					{% if item.larp in user.userProfile.get_larps %}
+						<dd><a href="{{item.get_absolute_url}}">{{item.name}}</a></dd>
+					{% else %}
+					{% endif %}
+				{% else %}
+					<dd><a href="{{item.get_absolute_url}}">{{item.name}}</a></dd>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		</dl>
+	</article>
+	
+{% endblock %}
+
+{% block sidebar %}
+
+<h1>Runs</h1>
+	{% include "mainpages/narrow_event_list.html" %}
+
+
+<p class="clearleft">Do you know of a run not listed?<br>
+<FORM METHOD="LINK" ACTION="/run/add/{{larp.id}}/">
+<INPUT TYPE="submit" VALUE="Add a Run">
+of <i>{{larp}}</i> to the database
+</FORM>
+</p>
+
+{% endblock sidebar %}

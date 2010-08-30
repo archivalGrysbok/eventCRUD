@@ -1,0 +1,7 @@
+Required:
+
+django-notification
+django-messages
+django-contact-form
+
+

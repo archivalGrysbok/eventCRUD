@@ -1,0 +1,35 @@
+<div id="event_list">
+<h1>Upcoming Events</h1>
+	{% regroup run_list by startdate.date as date_list %}
+	{% for date in date_list %}
+		{% for run in date.list%}
+		<article itemscope itemtype="http://data-vocabulary.org/Event">
+			<header>
+				<h2 itemprop="summary"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h2>
+				<span class="timeloc"> 
+				{% if run.startdate %}
+				<time itemprop="startDate" datetime="{{run.startdate|date:'c'}}" title="in {{run.startdate|timeuntil}}">
+				{{ run.startdate|date }}
+				</time>
+				<br>
+				{% endif %}
+				{% if run.location %}
+				<span itemprop="location">{{ run.location|default:"" }}</span>
+				{% endif %}
+				</span>
+			</header>
+			{% if run.description %}
+			<p itemprop="description">{{ run.description|default:"" }}</p>
+			{% endif %}
+		</article>
+		{% if not forloop.last %}
+		<hr />
+		{% endif %}
+		{% empty %}
+		Sorry, no events listed.
+		{% endfor %}
+		{% if not forloop.last %}
+		<hr />
+		{% endif %}
+	{% endfor %}
+</div>

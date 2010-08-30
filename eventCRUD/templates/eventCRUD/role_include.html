@@ -1,0 +1,12 @@
+{% if player.run.larp in user.userProfile.get_larps %}
+			as <a href="{{ player.character.get_absolute_url }}">{{player.get_name}}</a>
+		{% else %}
+			{% if userProfile == player.user %}
+			as <a href="{{ player.character.get_absolute_url }}">{{player.get_name}}</a>
+			{% else %}
+				{% if player.character.is_spoiler %}
+				{% else %}
+					as <a href="{{ player.character.get_absolute_url }}">{{player.get_name}}</a>
+				{% endif %}
+			{% endif %}
+		{% endif %}
