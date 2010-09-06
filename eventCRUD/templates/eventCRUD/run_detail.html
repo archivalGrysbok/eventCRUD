@@ -13,11 +13,10 @@
 
 {% block content %}
 	<article itemscope itemtype="http://data-vocabulary.org/Event">
-		<h1 itemprop="summary">Run: {{ run.name }}</h1>
 		{% if run.tentative %}<i>(tentative)</i>{% endif %}
 		<dl>
 		{% if run.url %}<dt>Homepage</dt><dd itemprop="url">{{ run.url|default:""|urlize }}</dd>{% endif %}
-		<dt>LARP</dt><dd><a href="{{run.larp.get_absolute_url}}">{{ run.larp }}</a> </dd>
+		<dt>LARP</dt><dd itemprop="summary"><a href="{{run.larp.get_absolute_url}}">{{ run.larp }}</a> </dd>
 		<dt>Date</dt><dd>
 			{% if run.startdate %}<time itemprop="startDate" datetime="{{run.startdate|date:'c'}}" 
 				{% if run.is_past %}
@@ -47,12 +46,10 @@
 		</dd>
 		{% if run.convention %}<dt>Convention</dt><dd itemprop="description"><p><a href="{{run.convention.get_absolute_url}}">{{ run.convention|default:"" }}</a></p></dd>{% endif %}
 		{% if run.location %}<dt>Location</dt><dd><span itemprop="location">{{ run.location|default:"" }}</span></dd>{% endif %}
-		{% if run.description %}<dt>Description</dt><dd itemprop="description">{{ run.description }}</dd>
+		{% if run.notes %}<dt>Notes</dt><dd>{{ run.notes|restructuredtext }}</dd>{% endif %}
+		{% if run.larp.summary %}<dt>Description</dt><dd itemprop="description">{{ run.larp.summary|restructuredtext }}</dd>
 		{% else %}
-			{% if run.larp.summary %}<dt>Description</dt><dd itemprop="description">{{ run.larp.summary }}</dd>
-			{% else %}
-				{% if run.larp.description %}<dt>Description</dt><dd itemprop="description">{{ run.larp.description }}</dd>{% endif %}
-			{% endif %}
+			{% if run.larp.description %}<dt>Description</dt><dd itemprop="description">{{ run.larp.description|restructuredtext }}</dd>{% endif %}
 		{% endif %}
 		</dl>
 	</article>

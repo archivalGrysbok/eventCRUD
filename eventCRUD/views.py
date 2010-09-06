@@ -179,10 +179,19 @@ def run_add_cast(request, run_id):
 				print 'huh?'
 				print request.POST['character']
 				print request.POST['characterName']
-				aChar=Character(larp=run.larp, name=request.POST["characterName"])
-				aChar.save()
-			aPlayer=Player(run=run, user=request.user, character=aChar, characterName=request.POST['characterName'])
-			aPlayer.save()
+				if request.POST["characterName"]!="":
+					aChar=Character(larp=run.larp, name=request.POST["characterName"])
+					aChar.save()
+				else:
+					print 'aChar is False'
+					aChar=False
+			if aChar:
+				aPlayer=Player(run=run, user=request.user, character=aChar, characterName=request.POST['characterName'])
+				aPlayer.save()
+			else:
+				print 'character name is empty'
+				aPlayer=Player(run=run, user=request.user)
+				aPlayer.save()
 			return HttpResponseRedirect(run.get_absolute_url())
 	else:
 		form = PlayerForm()
@@ -257,7 +266,7 @@ def resume_new(request, username):
 	for item in tempList:
 		shared=False
 		show=True
-		if item.character.spoiler:
+		if item.character and item.character.spoiler:		##item.character could be undefined
 			show=False
 		if item.run.larp in activeUserPlayed:
 			shared=True

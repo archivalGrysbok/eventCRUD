@@ -36,7 +36,7 @@
 		</span></dd>{% endif %}
 		{% if larp.larpseries %}<dt>{{larp.larpseries.get_type_display|capfirst}}</dt><dd><a href="{{larp.larpseries.get_absolute_url}}">{{ larp.larpseries.name|default:"" }}</a></dd>{% endif %}
 		{% if larp.url %}<dt>Homepage</dt><dd>{{ larp.url|default:"" }}</dd>{% endif %}
-		{% if larp.summary %}<dt>Summary</dt><dd><span>{{ larp.summary|default:"" }}</span></dd>{% endif %}
+		{% if larp.summary %}<dt>Summary</dt><dd><span>{{ larp.summary|default:""|restructuredtext }}</span></dd>{% endif %}
 		{% if larp.description %}<dt>Description</dt><dd>{{ larp.description|restructuredtext }}</dd>{% endif %}
 		<dt>Spoilerability</dt><dd>{{larp.get_spoilerability_display}}</dd>
 		{% if larp.length %}<dt>Length</dt><dd>{{ larp.get_length }}</dd>{% endif %}

@@ -171,12 +171,12 @@ class Character(models.Model): # formerly Role
 #		return u'%s' % (self.name)
 
 class Run(models.Model):
-	name = models.CharField(max_length=135, blank=True) #event name
+#	name = models.CharField(max_length=135, blank=True) #event name
 #	slug = models.SlugField(max_length=135, blank=True, null=True)
 	url = models.URLField(max_length=135, blank=True)
 	location= models.ForeignKey(Location, max_length=135, blank=True, null=True,)
 	convention = models.ForeignKey(Convention, max_length=135, null=True, blank=True)
-	description = models.TextField(max_length=15000, blank=True, null=True)
+	notes = models.TextField(max_length=15000, blank=True, null=True)
 	startdate = models.DateField(null=True, blank=True)
 	starttime=models.TimeField(null=True, blank=True)
 	enddate = models.DateField(null=True, blank=True,)
@@ -193,10 +193,10 @@ class Run(models.Model):
 #		super(Run, self).save(**kwargs)
 	def __unicode__(self):
 		value = u''
-		if self.name == "":
-			value=value+u'%s' % (self.larp)
-		else:
-			value = value+u' %s ' % (self.name)
+#		if self.name == "":
+#			value=value+u'%s' % (self.larp)
+#		else:
+		value = value+u' %s ' % (self.larp)
 		if self.convention is None:
 			if self.location is None:
 				pass
@@ -205,13 +205,13 @@ class Run(models.Model):
 		else:
 			value = value+u' @ %s' % (self.convention)
 		return value
-	def title(self):
-		value = u''
-		if self.name == "":
-			value=value+u'%s' % (self.larp)
-		else:
-			value = value+u' %s ' % (self.name)
-		return value
+#	def title(self):
+#		value = u''
+#		if self.name == "":
+#			value=value+u'%s' % (self.larp)
+#		else:
+#			value = value+u' %s ' % (self.name)
+#		return value
 	def _is_past(self):
 		try:
 			if (datetime.date.today()-self.startdate.date()).days>0:	##errors out if item.run.stardate not defined, hence the try/except. Todo: fix this
@@ -237,11 +237,11 @@ class Run(models.Model):
 				return "unknown location"
 	get_location = property(_get_location)
 	def _slug(self):
-		return slugify(self.name)
+		return slugify(self.larp.name)
 	slug=property(_slug)
 	def get_absolute_url(self):
-		t= slugify(self.name)
-		return "/games/%i/%i/%s" % (self.larp.id, self.id, self.slug)
+#		t= slugify(self.name)
+		return "/games/%i/%i/%s" % (self.larp.id, self.id, self.larp.slug)
 	class Meta:
 		ordering = ['startdate']
 

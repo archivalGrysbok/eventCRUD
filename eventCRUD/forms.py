@@ -24,7 +24,7 @@ class LarpForm(ModelForm):
 class RunForm(ModelForm):
 	error_css_class = 'error'
 	required_css_class = 'required'
-	name = CharField(help_text='Usually blank (the title of the Larp will be used instead).', required=False)
+#	name = CharField(help_text='Usually blank (the title of the Larp will be used instead).', required=False)
 	startdate = DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 10, datetime.date.today().year + 2 )), label='Start Date', required=False)
 	starttime = TimeField(label='Start Time', required=False, input_formats=valid_time_formats)
 	enddate=DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 10, datetime.date.today().year + 2 )), label='End Date', required=False)

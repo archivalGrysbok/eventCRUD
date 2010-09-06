@@ -1,3 +1,4 @@
+{% load markup %}
 <div id="event_list">
 <h1>Upcoming Events</h1>
 	{% regroup run_list by startdate.date as date_list %}
@@ -5,7 +6,7 @@
 		{% for run in date.list%}
 		<article itemscope itemtype="http://data-vocabulary.org/Event">
 			<header>
-				<h2 itemprop="summary"><a href="{{ run.get_absolute_url }}">{{ run.name }}</a></h2>
+				<h2 itemprop="summary"><a href="{{ run.get_absolute_url }}">{{ run.larp.title }}</a></h2>
 				<span class="timeloc"> 
 				{% if run.startdate %}
 				<time itemprop="startDate" datetime="{{run.startdate|date:'c'}}" title="in {{run.startdate|timeuntil}}">
@@ -18,8 +19,12 @@
 				{% endif %}
 				</span>
 			</header>
-			{% if run.description %}
-			<p itemprop="description">{{ run.description|default:"" }}</p>
+			{% if run.larp.summary %}
+			<p itemprop="description">{{ run.larp.summary|default:""|restructuredtext }}</p>
+			{% else %}
+				{% if run.larp.description %}
+				<p itemprop="description">{{ run.larp.description|default:""|restructuredtext|truncatewords_html:100 }}</p>
+				{% endif %}
 			{% endif %}
 		</article>
 		{% if not forloop.last %}
