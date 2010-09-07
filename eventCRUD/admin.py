@@ -53,10 +53,10 @@ class Larp2LarpSeriesInline(admin.TabularInline):
 	extra = 3
 
 class RunAdmin(admin.ModelAdmin):
-	list_display = ('larp','startdate','get_location','convention','slug',)
-	list_filter = ('convention','startdate','larp') 
+	list_display = ('larp','startdate','get_location','convention')
+	list_filter = ('location','convention','startdate','larp') 
 	ordering = ('startdate',)
-	search_fields = ('startdate','location','notes')
+	search_fields = ('startdate','location','notes','larp','convention')
 	date_hierarchy = 'startdate'
 	inlines = (GMInline, PlayerInline, NPCInline)
 	readonly_fields = ('slug',)
