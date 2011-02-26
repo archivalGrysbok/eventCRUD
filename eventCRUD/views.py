@@ -256,21 +256,29 @@ def resume_new(request, username):
 	"""
 	try:
 		activeUser = User.objects.get(pk=request.user.id)
-		activeUserPlayed=activeUser.userProfile.get_larps()
+#		activeUserProfile = activeUser
 	except:
 		activeUser = None
+	try:
+		activeUserProfile = UserProfile.objects.get(pk=request.user.id)
+		activeUserPlayed=activeUserProfile.get_larps()
+	except:
 		activeUserPlayed=[]
+		print "activeuserPlayed excepted"
+	print activeUserPlayed
 	resumeUser = User.objects.get(username=username)
 	list=[]
 	tempList=resumeUser.player_set.select_related(depth=2).order_by("-run__startdate")
 	for item in tempList:
 		shared=False
 		show=True
-		if item.character and item.character.spoiler:		##item.character could be undefined
+		if item.character and item.character.is_spoiler:		##item.character could be undefined
 			show=False
 		if item.run.larp in activeUserPlayed:
 			shared=True
 			show=True
+			print "I've Played This"
+			print item.run.larp
 		list.append({'type':'Played', 'cast':item, 'show':show, 'shared':shared})
 	tempList=resumeUser.npc_set.select_related(depth=2).order_by("-run__startdate")
 	for item in tempList:
@@ -287,7 +295,7 @@ def resume_new(request, username):
 	tempList=resumeUser.author_set.select_related(depth=2).order_by("larp__title")
 	for item in tempList:
 		played=False
-		if item.run.larp in activeUserPlayed:
+		if item.larp in activeUserPlayed:
 			played=True
 		list.append({'type':'Authored', 'cast':item, 'played':played,})
 		

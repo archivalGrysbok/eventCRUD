@@ -2,7 +2,7 @@
 	{% for run in run_list%}
 		<article>
 			<header>
-				<h2><a href='{{ run.get_absolute_url }}'>{{ run }}</a></h2>
+				<h2><a href='{{ run.get_absolute_url }}'>{{ run.larp }}</a></h2>
 				<span class="timeloc"> 
 				{% if run.startdate %}
 				<time datetime="{{run.startdate|date:'c'}}" title="in {{run.startdate|timeuntil}}">{{ run.startdate|date }}</time> <br>

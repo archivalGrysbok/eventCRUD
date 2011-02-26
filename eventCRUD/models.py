@@ -20,6 +20,8 @@ class UserProfile(models.Model):
 		gmSet=self.user.gm_set.all()
 		npcSet=self.user.npc_set.all()
 		playerSet=self.user.player_set.all()
+		print "playerSet"
+		print playerSet
 		authorSet=self.user.author_set.all()
 		list=[]
 		for item in gmSet:
@@ -27,12 +29,20 @@ class UserProfile(models.Model):
 		for item in npcSet:	
 			list.append(item.run.larp)
 		for item in playerSet:
+#			print item
+#			print item.run
+#			print item.run.is_past
  			if item.run.is_past:
 				list.append(item.run.larp)
+				print item.run.larp
+#				print "is past"
 			else:
+#				print "not past larp"
 				pass
 		for item in authorSet:
 			list.append(item.larp)		
+#		print "The List:"		
+#		print list
 		return list
 #	def get_name:
 #		if displayName:
@@ -214,14 +224,16 @@ class Run(models.Model):
 #		return value
 	def _is_past(self):
 		try:
-			if (datetime.date.today()-self.startdate.date()).days>0:	##errors out if item.run.stardate not defined, hence the try/except. Todo: fix this
+			if datetime.date.today() > self.startdate: 	##errors out if item.run.startdate not defined, hence the try/except. Todo: fix this
 				return True
 		except:
-			if self.past:
-				return True
+			print "is past excepted"
+			return self.past
 		else:
+			print "returning false"
 			return False
 	is_past = property(_is_past)
+
 	def _time_given(self):
 		if self.starttime:
 			return True

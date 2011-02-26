@@ -81,8 +81,26 @@
 {% block sidebar %}
 
 <h1>Runs</h1>
-	{% include "mainpages/narrow_event_list.html" %}
 
+<div id="narrow_event_list" >
+	{% for run in run_list%}
+		<article>
+			<header>
+				<a href='{{ run.get_absolute_url }}'>
+					<span class="timeloc"> 
+						<time datetime="{{run.startdate|date:'c'}}" title="in {{run.startdate|timeuntil}}">{{ run.startdate|date|default:"unknown date" }}</time>,
+					{{ run.get_location|default:"unknown location" }}
+				</span>
+				</a>
+			</header>
+		</article>
+	{% if not forloop.last %}
+		<hr />
+	{% endif %}
+	{% empty %}
+		Sorry, no events listed.
+	{% endfor %}
+</div>
 
 <p class="clearleft">Do you know of a run not listed?<br>
 <FORM METHOD="LINK" ACTION="/run/add/{{larp.id}}/">

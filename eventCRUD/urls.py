@@ -5,6 +5,7 @@ from views import run_detail, larp_detail, larp_add, run_add, run_add_cast,  cha
 from models import Run, Larp, UserProfile
 from django.template.defaultfilters import slugify
 from django.views.generic.simple import direct_to_template
+#from feeds import UpcomingRunsFeed
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -61,5 +62,8 @@ urlpatterns = patterns('',
 	(r'people/(?P<username>\w+)/$', user_detail),	
 	
 	(r'home/$', myhome),
+
+#	(r'^feed/$', UpcomingRunsFeed()),
+
 	(r'^$', myhome),
 )

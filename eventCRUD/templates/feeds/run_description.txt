@@ -1,6 +1,0 @@
-{{ obj.startdate }} @ {{ obj.enddate }} to {{ obj.enddate }} @ {{ obj.endtime }}
-<br>
-{{obj.get_location}}
-<br>
-{{ obj.description }}
-

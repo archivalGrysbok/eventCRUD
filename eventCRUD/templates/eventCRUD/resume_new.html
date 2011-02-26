@@ -14,7 +14,7 @@
 
 {% block content %}
 
-<h1>{{ resumeUser.userProfile }}'s Larp Resume<h1>
+<h1>{{ resumeUser.userProfile }}'s Larp Resume DDDDD<h1>
 
 {% if cast_list %}
 	{% regroup cast_list by type as type_list %}
@@ -27,9 +27,9 @@
 			<h2>{{ item.cast.run.startdate|date:'Y'|default:"Unknown date" }}</h2>
 			<ul>
 			{% endifchanged %}
-			<li><a href="{{ item.cast.run.get_absolute_url }}">{{ item.cast.run }}</a>
+			<li><a href="{{ item.cast.run.get_absolute_url }}">{{ item.cast.run.larp }}</a>
 			{% if type.grouper == "Played" %}
-				{% if item.show %}
+				{% if item.show and item.cast.character %}
 				as <a href="{{item.cast.character.get_absolute_url}}">{{item.cast.get_name}}</a>
 				{% endif %}
 			{% endif %}
