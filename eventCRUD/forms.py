@@ -2,7 +2,7 @@ from django.db import models
 from django import forms
 from django.forms import ModelForm, DateField, TimeField, BooleanField, CharField, ChoiceField
 from django.forms.widgets import *
-from models import Larp, Run, Player, GM, NPC, UserProfile
+from models import Larp, Run, Player, GM, NPC, Author, UserProfile
 from django.contrib.admin import widgets
 from django.forms.extras.widgets import *
 from django.forms.models import inlineformset_factory
@@ -55,6 +55,13 @@ class NpcForm(ModelForm):
 	class Meta:
 		model=NPC
 		exclude = ('run','user')
+
+class AuthorForm(ModelForm):
+	error_css_class = 'error'
+	required_css_class = 'required'
+	class Meta:
+		model=Author
+		exclude = ('larp','user')
 
 class UserProfileForm(ModelForm):
 	error_css_class = 'error'

@@ -11,7 +11,7 @@ from django.views.generic import list_detail
 from django.views.generic.list_detail import object_detail
 from django.views.generic.simple import direct_to_template, HttpResponseRedirect
 
-from forms import LarpForm, RunForm, PlayerForm, GmForm, NpcForm, UserProfileForm
+from forms import LarpForm, RunForm, PlayerForm, GmForm, NpcForm, AuthorForm, UserProfileForm
 from models import Run, Larp, Player, NPC, GM, Author, UserProfile, LarpSeries, Convention, Character
 
 # Create your views here.
@@ -245,6 +245,28 @@ def npc_add(request, object_id):
 			run=form.save()
 			return HttpResponseRedirect(aNPC.run.get_absolute_url())
 	return HttpResponseRedirect(run.get_absolute_url())
+
+
+@login_required
+def author_add(request, object_id):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	@param object_id:
+	@type object_id:
+	"""
+	aLarp = get_object_or_404(Larp, pk=object_id)
+	anAuthor = Author(larp=aLarp, user=request.user)
+	if request.method == "POST":
+		form = AuthorForm(request.POST,instance=anAuthor)
+		if form.is_valid():
+			run=form.save()
+			return HttpResponseRedirect(anAuthor.larp.get_absolute_url())
+	return HttpResponseRedirect(run.get_absolute_url())
+
+
+
 
 def resume_new(request, username):
 	"""
