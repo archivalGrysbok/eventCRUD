@@ -25,7 +25,7 @@
 				, 
 				{% endif %}
 			{% endif %}
-			{% if item.userProfile %}<a href="{{item.userProfile.get_absolute_url}}">			
+			{% if item.userProfile %}<a href="{{item.userProfile.get_absolute_url}}">
 			{{item}}
 			</a>
 			{% else %}
@@ -89,7 +89,7 @@
 				<a href='{{ run.get_absolute_url }}'>
 					<span class="timeloc"> 
 						<time datetime="{{run.startdate|date:'c'}}" title="in {{run.startdate|timeuntil}}">{{ run.startdate|date|default:"unknown date" }}</time>,
-					{{ run.get_location|default:"unknown location" }}
+					{{ run.location|default:"unknown location" }}
 				</span>
 				</a>
 			</header>
@@ -100,6 +100,7 @@
 	{% empty %}
 		Sorry, no events listed.
 	{% endfor %}
+
 </div>
 
 <p class="clearleft">Do you know of a run not listed?<br>
@@ -108,5 +109,11 @@
 of <i>{{larp}}</i> to the database
 </FORM>
 </p>
+
+	<form method="post" action="/games/{{larp.id}}/author_add/">
+	{% csrf_token %}
+		{{ author_form.as_p }}
+	<p><input type="submit" value="I wrote this Larp" /></p>
+	</form>
 
 {% endblock sidebar %}
