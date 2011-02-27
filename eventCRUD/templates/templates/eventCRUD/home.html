@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block rss%}
+<link rel="alternate" type="application/rss+xml" 
+      title="Upcoming Runs"  href="./feed"  />
+{% endblock %}
+
+{% block title %}
+{% endblock %}
+
+{% block subhead %}
+{% endblock subhead %}
+
+{% block content %}
+	{% include "eventCRUD/event_list.html" %}	
+
+<!--	{% include "mainpages/blogentry_list.html" %} 
+	{% include "mainpages/announcements_list.html" %}
+	{% include "mainpages/friends_updates_list.html" %}
+	{% include "mainpages/friends_games_list.html" %} -->
+{% endblock %}
+
+{% block sidebar %}
+
+	{% include "eventCRUD/narrow_event_list.html" %}
+
+{% endblock sidebar %}

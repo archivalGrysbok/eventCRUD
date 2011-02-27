@@ -1,0 +1,20 @@
+<div id="narrow_event_list" >
+	{% for run in run_list%}
+		<article>
+			<header>
+				<h2><a href='{{ run.get_absolute_url }}'>{{ run.larp }}</a></h2>
+				<span class="timeloc"> 
+				{% if run.startdate %}
+				<time datetime="{{run.startdate|date:'c'}}" title="in {{run.startdate|timeuntil}}">{{ run.startdate|date }}</time> <br>
+				{% endif %}
+				{{ run.location|default:"" }}
+				</span>
+			</header>
+		</article>
+	{% if not forloop.last %}
+		<hr />
+	{% endif %}
+	{% empty %}
+		Sorry, no events listed.
+	{% endfor %}
+</div>
