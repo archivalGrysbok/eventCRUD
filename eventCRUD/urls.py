@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail, date_based
 from django.views.generic.simple import direct_to_template
-from views import run_detail, larp_detail, larp_add, run_add, run_add_cast, author_add, character_detail, search, series_detail, con_detail, user_detail, gm_add, npc_add, resume_new, myhome
+from views import run_detail, larp_detail, larp_add, run_add, run_add_cast, author_add, author_delete, character_detail, search, series_detail, con_detail, user_detail, gm_add, gm_delete, npc_add, npc_delete, player_delete, resume_new, myhome
 from models import Run, Larp, UserProfile
 from django.template.defaultfilters import slugify
 from django.views.generic.simple import direct_to_template
@@ -22,7 +22,7 @@ larp_info = {
 }
 
 people_info = {
-	'queryset': UserProfile.objects.all(),
+	'queryset': UserProfile.objects.order_by('displayName'),
 	'template_object_name': 'userProfile',
 	'template_name':'eventCRUD/userProfile_list.html'
 }
@@ -37,8 +37,12 @@ urlpatterns = patterns('',
 #	(r'run/(?P<id>\d+)/[-\w]*$', run_detail),
 	(r'run/(?P<run_id>\d+)/add_cast/$', run_add_cast),
 	(r'run/(?P<object_id>\d+)/gm_add/$', gm_add),
-	(r'run/(?P<object_id>\d+)/npc_add/$', npc_add),
+	(r'run/(?P<object_id>\d+)/gm_delete/(?P<gm_id>\d+)/$', gm_delete),
 	(r'games/(?P<object_id>\d+)/author_add/$', author_add),
+	(r'games/(?P<object_id>\d+)/author_delete/(?P<author_id>\d+)/$', author_delete),
+	(r'run/(?P<object_id>\d+)/npc_add/$', npc_add),
+	(r'run/(?P<object_id>\d+)/npc_delete/(?P<npc_id>\d+)/$', npc_delete),
+	(r'run/(?P<object_id>\d+)/player_delete/(?P<player_id>\d+)/$', player_delete),
 	
 	(r'run/add/(?P<object_id>\d+)/$', run_add),
 
@@ -60,7 +64,8 @@ urlpatterns = patterns('',
 	(r'people/(?P<username>\w+)/resume/$', resume_new),
 	(r'people/(?P<username>\w+)/resume_new/$', resume_new),
 
-	(r'people/(?P<username>\w+)/$', user_detail),	
+#	(r'people/(?P<username>\w+)/$', user_detail),	
+	(r'people/(?P<username>\w+)/$', resume_new),
 	
 	(r'home/$', myhome),
 

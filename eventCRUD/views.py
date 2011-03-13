@@ -227,7 +227,49 @@ def gm_add(request, object_id):
 			run=form.save()
 			return HttpResponseRedirect(aGM.run.get_absolute_url())
 	return HttpResponseRedirect(run.get_absolute_url())
-	
+
+@login_required
+def gm_delete(request, object_id, gm_id):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	@param object_id:
+	@type object_id:
+	"""
+	run = get_object_or_404(Run, pk=object_id)
+	aGM = get_object_or_404(GM, run=run, user=request.user, pk=gm_id)
+	aGM.delete()
+	return HttpResponseRedirect(run.get_absolute_url())
+
+@login_required
+def npc_delete(request, object_id, npc_id):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	@param object_id:
+	@type object_id:
+	"""
+	run = get_object_or_404(Run, pk=object_id)
+	aNPC = get_object_or_404(NPC, run=run, user=request.user, pk=npc_id)
+	aNPC.delete()
+	return HttpResponseRedirect(run.get_absolute_url())
+
+@login_required
+def player_delete(request, object_id, player_id):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	@param object_id:
+	@type object_id:
+	"""
+	run = get_object_or_404(Run, pk=object_id)
+	aPlayer = get_object_or_404(Player, run=run, user=request.user, pk=player_id)
+	aPlayer.delete()
+	return HttpResponseRedirect(run.get_absolute_url())
+
 @login_required
 def npc_add(request, object_id):
 	"""
@@ -265,7 +307,19 @@ def author_add(request, object_id):
 			return HttpResponseRedirect(anAuthor.larp.get_absolute_url())
 	return HttpResponseRedirect(run.get_absolute_url())
 
-
+@login_required
+def author_delete(request, object_id, author_id):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	@param object_id:
+	@type object_id:
+	"""
+	larp = get_object_or_404(Larp, pk=object_id)
+	aAuthor = get_object_or_404(Author, larp=larp, user=request.user, pk=author_id)
+	aAuthor.delete()
+	return HttpResponseRedirect(larp.get_absolute_url())
 
 
 def resume_new(request, username):

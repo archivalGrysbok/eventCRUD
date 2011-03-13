@@ -44,6 +44,7 @@ class UserProfile(models.Model):
 #		print "The List:"		
 #		print list
 		return list
+	ordering = ['displayName']
 #	def get_name:
 #		if displayName:
 #			return displayName
@@ -267,7 +268,6 @@ class Author(models.Model):
 		else:
 			return u'%s' % (self.user.userProfile)
 
-
 class Cast(models.Model):
 	run=models.ForeignKey(Run, related_name="%(app_label)s_%(class)s_related")
 	user = models.ForeignKey(User, blank=True, null=True)
@@ -291,7 +291,7 @@ class Player(Cast):
 			return self.characterName
 		else:
 			return self.character.name
-		
+
 class Larp2LarpSeries(models.Model):
 	larpSeries=models.ForeignKey(LarpSeries,)
 	larp = models.ForeignKey(Larp, unique=True)
