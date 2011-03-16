@@ -23,7 +23,7 @@
 			<ul>
 			{% if type.grouper == "Authored" %}
 				{% for item in type.list %}	
-				<li><a href="{{item.cast.larp.get_absolute_url}}">{{ item.cast.larp }}</a></li>
+				<li><strong><a href="{{item.cast.larp.get_absolute_url}}">{{ item.cast.larp }}</a></strong></li>
 				{% endfor %}
 			{% else %}
 				{% for item in type.list %}
@@ -32,7 +32,7 @@
 					<h2>{{ item.cast.run.startdate|date:'Y'|default:"Unknown date" }}</h2>
 					<ul>
 					{% endifchanged %}
-					<li><a href="{{ item.cast.run.get_absolute_url }}">{{ item.cast.run.larp }}</a>
+					<li><strong><a href="{{ item.cast.run.get_absolute_url }}">{{ item.cast.run.larp }}</a></strong>
 					{% if type.grouper == "Played" %}
 						{% if item.show and item.cast.character %}
 						as <a href="{{item.cast.character.get_absolute_url}}">{{item.cast.get_name}}</a>
@@ -45,16 +45,19 @@
 	{% endfor %}
 {% endif %}
 
-{% if author_list %}
-	<h1>Written</h1>
-		<ul>
-		{% for item in author_list %}
-			<li>
-			<a href="{{ item.larp.get_absolute_url }}">{{ item.larp }}</a>
-			</li>
-		{% endfor %}
-	</ul>
-{% endif %}
-</dl>
 {% endblock content %}
 
+{% block sidebar %}
+<ul>
+
+{% ifequal aUser.username user.username %}
+	<li><a href="/accounts/password/change">Change Password</a></li>
+	<li><a href="/messages/inbox/">Message Inbox</a></li>
+
+{% else %}{% if user.is_authenticated %}
+	<li><a href="/messages/compose/{{aUser.username}}">Send {{aUser.username}} a message</a></li>
+	{% endif %}
+{% endifequal %}
+
+</ul>
+{% endblock sidebar %}

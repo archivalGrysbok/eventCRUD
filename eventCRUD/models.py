@@ -44,7 +44,8 @@ class UserProfile(models.Model):
 #		print "The List:"		
 #		print list
 		return list
-	ordering = ['displayName']
+	class Meta:
+		ordering = ['displayName']
 #	def get_name:
 #		if displayName:
 #			return displayName
@@ -75,6 +76,8 @@ class Location(models.Model):
 				value=value+u', '
 			value = value+u'%s' % (self.state)
 		return value
+	class Meta:
+		ordering = ['name']
 
 class LarpSeries(models.Model):
 	name = models.CharField(max_length=135)
@@ -157,6 +160,8 @@ class Convention(models.Model):
 		return u'/convention/%s/' % (self.id )
 	def __unicode__(self):
 		return u'%s' % (self.title)
+	class Meta:
+		ordering = ['title']
 
 class Character(models.Model): # formerly Role
 	name = models.CharField(max_length=135)
@@ -174,6 +179,8 @@ class Character(models.Model): # formerly Role
 		else:
 			return self.spoiler
 	is_spoiler=property(_get_spoiler)
+	class Meta:
+		ordering = ['name']
 
 #class Character(models.Model):
 #	name = models.CharField(max_length=135)
@@ -275,6 +282,8 @@ class Cast(models.Model):
 		abstract = True
 	def __unicode__(self):
 		return u'%s' % (self.user.userProfile)
+#	class Meta:
+#		order_with_respect_to = 'user'
 
 class GM(Cast):
 	pass

@@ -12,7 +12,6 @@
 <dl>
 	<article>
 		<h1>
-		
 		{% if role.larp in userProfile.get_larps %}
 			{{role.name}}
 		{% else %}
@@ -22,12 +21,9 @@
 				[role name redacted]
 			{% endif %}
 		{% endif %}
-				
 		</h1>
 		<dt>LARP</dt><dd><a href="{{role.larp.get_absolute_url}}">{{ role.larp }}</a> </dd>
 	</article>
-	
-
 </dl>
 {% endblock %}
 

@@ -25,8 +25,9 @@
 				, 
 				{% endif %}
 			{% endif %}
-			{% if item.userProfile %}<a href="{{item.userProfile.get_absolute_url}}">
-			{{item}}
+			{% if item.user %}<a href="{{item.user.userProfile.get_absolute_url}}"> 
+			{{item}} 
+			{% ifequal item.user user %} <a href="/games/{{larp.id}}/author_delete/{{item.id}}/">[remove]</a>{% endifequal %}
 			</a>
 			{% else %}
 			{{item}}
@@ -105,15 +106,23 @@
 
 <p class="clearleft">Do you know of a run not listed?<br>
 <FORM METHOD="LINK" ACTION="/run/add/{{larp.id}}/">
+
+{% if not user.is_authenticated %}
+Sign in or register to 
+{% endif %}
+
 <INPUT TYPE="submit" VALUE="Add a Run">
 of <i>{{larp}}</i> to the database
 </FORM>
 </p>
 
-	<form method="post" action="/games/{{larp.id}}/author_add/">
+
+{% if user.is_authenticated %}
+<form method="post" action="/games/{{larp.id}}/author_add/">
 	{% csrf_token %}
 		{{ author_form.as_p }}
-	<p><input type="submit" value="I wrote this Larp" /></p>
-	</form>
+	<p><input type="submit" value="Add me as an Author" /></p>
+</form>
+{% endif %}
 
 {% endblock sidebar %}

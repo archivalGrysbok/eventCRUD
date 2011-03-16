@@ -36,7 +36,7 @@
 			<h2>{{ date.grouper|date:"l" }}</h2>
 			<ul>
 			{% for run in date.list %}
-				<li><a href="{{run.get_absolute_url}}">{{run.title}}</a></li>
+				<li><a href="{{run.get_absolute_url}}">{{run.larp}}</a></li>
 			{% endfor %}
 			</ul>
 		{% endfor %}

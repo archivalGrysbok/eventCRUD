@@ -85,7 +85,10 @@
 	<h1>GM</h1>
 	<ul>
 	{% for gm in gm_list %}
-		<li><a href="{{gm.user.userProfile.get_absolute_url}}">{{gm}}</a></li>
+		<li><a href="{{gm.user.userProfile.get_absolute_url}}">{{gm}}</a> 
+		{% ifequal gm.user user %}
+		<a href="/run/{{run.id}}/gm_delete/{{gm.id}}/">[remove]</a>
+		{% endifequal %} </li>
 	{% endfor %}
 	</ul>
 {% endif %}
@@ -94,7 +97,10 @@
 	<h1>NPC</h1>
 	<ul>
 	{% for npc in npc_list %}
-		<li><a href="{{npc.user.userProfile.get_absolute_url}}">{{npc}}</a></li>
+		<li><a href="{{npc.user.userProfile.get_absolute_url}}">{{npc}}</a>
+		{% ifequal npc.user user %}
+		<a href="/run/{{run.id}}/npc_delete/{{npc.id}}/">[remove]</a>
+		{% endifequal %} </li>
 	{% endfor %}
 	</ul>
 {% endif %}
@@ -106,28 +112,33 @@
 	{% for player in player_list %}
 		<li><a href="{{player.user.get_profile.get_absolute_url}}">{{player}}</a>
 		{% include "eventCRUD/role_include.html" %}
+		{% ifequal player.user user %}
+		<a href="/run/{{run.id}}/player_delete/{{player.id}}/">[remove]</a>
+		{% endifequal %} </li>
 		</li>
 	{% endfor %}
 	</ul>
 {% endif %}
 
-{% if userProfile %}
+{% if user.is_authenticated %}
+
+<FORM METHOD="LINK" ACTION="/run/{{run.id}}/add_cast/">
+<p><INPUT TYPE="submit" VALUE="Add me as a PC"></p>
+</FORM>
 
 <form method="post" action="/run/{{run.id}}/npc_add/">
 {% csrf_token %}
     {{ npc_form.as_p }}
-<p><input type="submit" value="I NPCed" /></p>
+<p><input type="submit" value="Add me as an NPC" /></p>
 </form>
 
 <form method="post" action="/run/{{run.id}}/gm_add/">
 {% csrf_token %}
     {{ gm_form.as_p }}
-<p><input type="submit" value="I GMed" /></p>
+<p><input type="submit" value="Add me as a GM" /></p>
 </form>
 
-<FORM METHOD="LINK" ACTION="/run/{{run.id}}/add_cast/">
-<INPUT TYPE="submit" VALUE="I PCed">
-</FORM>
+
 {% endif %}
 
 {% endblock sidebar %}
