@@ -11,7 +11,7 @@ from django.views.generic import list_detail
 from django.views.generic.list_detail import object_detail
 from django.views.generic.simple import direct_to_template, HttpResponseRedirect
 
-from forms import LarpForm, RunForm, PlayerForm, GmForm, NpcForm, AuthorForm, UserProfileForm
+from forms import LarpForm, RunForm, PlayerForm, GmForm, NpcForm, AuthorForm, UserProfileForm, ConventionForm, LocationForm
 from models import Run, Larp, Player, NPC, GM, Author, UserProfile, LarpSeries, Convention, Character
 
 # Create your views here.
@@ -461,3 +461,49 @@ def myhome(request):
 			extra_context = {
 			'run_list':Run.objects.filter(startdate__isnull=False).filter(startdate__gt=datetime.now).order_by("startdate")},
 			)
+
+
+
+
+@login_required
+def location_add(request):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	"""
+	if request.method == "POST":
+		form = LocationForm(request.POST)
+		if form.is_valid():
+			larp=form.save()
+			return HttpResponseRedirect(location.get_absolute_url())
+	else:
+		form = LocationForm()
+	
+	return render_to_response('eventCRUD/location_add.html', {
+		'form':form, 
+		},
+		context_instance=RequestContext(request)
+	)
+
+@login_required
+def convention_add(request):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	"""
+	if request.method == "POST":
+		form = ConventionForm(request.POST)
+		if form.is_valid():
+			convention=form.save()
+			return HttpResponseRedirect(convention.get_absolute_url())
+	else:
+		form = ConventionForm()
+	
+	return render_to_response('eventCRUD/convention_add.html', {
+		'form':form, 
+		},
+		context_instance=RequestContext(request)
+	)
+

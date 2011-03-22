@@ -1,8 +1,8 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail, date_based
 from django.views.generic.simple import direct_to_template
-from views import run_detail, larp_detail, larp_add, run_add, run_add_cast, author_add, author_delete, character_detail, search, series_detail, con_detail, user_detail, gm_add, gm_delete, npc_add, npc_delete, player_delete, resume_new, myhome
-from models import Run, Larp, UserProfile
+from views import run_detail, larp_detail, larp_add, run_add, run_add_cast, author_add, author_delete, character_detail, search, series_detail, con_detail, user_detail, gm_add, gm_delete, npc_add, npc_delete, player_delete, resume_new, myhome, convention_add, location_add
+from models import Run, Larp, UserProfile, Convention
 from django.template.defaultfilters import slugify
 from django.views.generic.simple import direct_to_template
 #from feeds import UpcomingRunsFeed
@@ -19,6 +19,16 @@ run_info = {
 larp_info = {
 	'queryset': Larp.objects.order_by('title'),
 	'template_object_name': 'larp',
+}
+
+convention_info = {
+	'queryset': Convention.objects.order_by('title'),
+	'template_object_name': 'convention',
+}
+
+location_info = {
+	'queryset': Convention.objects.order_by('name'),
+	'template_object_name': 'location',
 }
 
 people_info = {
@@ -52,6 +62,12 @@ urlpatterns = patterns('',
 	(r'larp/add/$', larp_add),
 	(r'games/add/$', larp_add),
 
+	(r'location/add/$', location_add),
+	(r'locations/add/$', location_add),
+	(r'locations/add/$', list_detail.object_list, location_info),
+	(r'conventions/$', list_detail.object_list, convention_info),
+	(r'conventions/add/$', convention_add),
+	(r'conventions/(?P<object_id>\d+)/$', con_detail),
 	(r'convention/(?P<object_id>\d+)/$', con_detail),
 #	(r'convention/$', list_detail.object_list, con_info),
 

@@ -2,7 +2,7 @@ from django.db import models
 from django import forms
 from django.forms import ModelForm, DateField, TimeField, BooleanField, CharField, ChoiceField
 from django.forms.widgets import *
-from models import Larp, Run, Player, GM, NPC, Author, UserProfile
+from models import Larp, Run, Player, GM, NPC, Author, UserProfile, Convention, Location
 from django.contrib.admin import widgets
 from django.forms.extras.widgets import *
 from django.forms.models import inlineformset_factory
@@ -19,7 +19,6 @@ class LarpForm(ModelForm):
 		exclude = ('larpseries','author')
 	spoilerability  = forms.CharField(max_length=3,
                 widget=forms.Select(choices=Larp.SPOILERABILITY_CHOICES), help_text="")
-
 
 class RunForm(ModelForm):
 	error_css_class = 'error'
@@ -69,3 +68,15 @@ class UserProfileForm(ModelForm):
 	class Meta:
 		model=UserProfile
 #		exclude = ('run','userProfile')
+
+class ConventionForm(ModelForm):
+	error_css_class = 'error'
+	required_css_class = 'required'
+	class Meta:
+		model=Convention
+
+class LocationForm(ModelForm):
+	error_css_class = 'error'
+	required_css_class = 'required'
+	class Meta:
+		model=Location
