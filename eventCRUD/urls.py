@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.views.generic import list_detail, date_based
 from django.views.generic.simple import direct_to_template
-from views import run_detail, larp_detail, larp_add, run_add, run_add_cast, author_add, author_delete, character_detail, search, series_detail, con_detail, user_detail, gm_add, gm_delete, npc_add, npc_delete, player_delete, resume_new, myhome, convention_add, location_add
+from views import run_detail, larp_detail, larp_add, run_add, run_add_cast, author_add, author_delete, character_detail, search, series_detail, con_detail, user_detail, gm_add, gm_delete, npc_add, npc_delete, player_delete, resume_new, myhome, convention_add, location_add, run_edit, larp_edit
 from models import Run, Larp, UserProfile, Convention
 from django.template.defaultfilters import slugify
 from django.views.generic.simple import direct_to_template
@@ -53,7 +53,9 @@ urlpatterns = patterns('',
 	(r'run/(?P<object_id>\d+)/npc_add/$', npc_add),
 	(r'run/(?P<object_id>\d+)/npc_delete/(?P<npc_id>\d+)/$', npc_delete),
 	(r'run/(?P<object_id>\d+)/player_delete/(?P<player_id>\d+)/$', player_delete),
-	
+	(r'run/(?P<object_id>\d+)/edit/$', run_edit),
+	(r'run/(?P<id>\d+)/[-\w]*$', run_detail),
+
 	(r'run/add/(?P<object_id>\d+)/$', run_add),
 
 	(r'games/$',  list_detail.object_list, larp_info),
@@ -61,6 +63,8 @@ urlpatterns = patterns('',
 	(r'games/(?P<object_id>\d+)/[-\w]*$', larp_detail),
 	(r'larp/add/$', larp_add),
 	(r'games/add/$', larp_add),
+	(r'larp/(?P<object_id>\d+)/edit/$', larp_edit),
+	(r'games/(?P<object_id>\d+)/edit/$', larp_edit),
 
 	(r'location/add/$', location_add),
 	(r'locations/add/$', location_add),

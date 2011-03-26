@@ -31,7 +31,7 @@ class RunForm(ModelForm):
 	past = BooleanField(help_text="Please check this box if the run occured in the past, but you are unsure of the date", required=False)
 	class Meta:
 		model=Run
-		exclude = ('larp','gm','npc','player')
+		exclude = ('larp','gm','npc','player','creator')
 
 class GmForm(ModelForm):
 	error_css_class = 'error'

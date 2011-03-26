@@ -14,6 +14,32 @@ from django.views.generic.simple import direct_to_template, HttpResponseRedirect
 from forms import LarpForm, RunForm, PlayerForm, GmForm, NpcForm, AuthorForm, UserProfileForm, ConventionForm, LocationForm
 from models import Run, Larp, Player, NPC, GM, Author, UserProfile, LarpSeries, Convention, Character
 
+def canEditRun(aRun, aUser):
+	"""
+	FIXME
+	@param aRun:
+	@type aRun:
+	@param aUser:
+	@type aUser:
+	"""
+	if aRun.creator==aUser:
+		return True
+	return False
+
+def canEditLarp(aLarp, aUser):
+	"""
+	FIXME
+	@param aLarp:
+	@type aLarp:
+	@param aUser:
+	@type aUser:
+	"""
+	if aLarp.creator==aUser:
+		return True
+	return False
+
+
+
 # Create your views here.
 
 def run_detail(request, id):
@@ -131,6 +157,33 @@ def larp_add(request):
 	)
 
 @login_required
+def larp_edit(request, object_id):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	@param object_id:
+	@type object_id:
+	"""
+	aLarp = Larp.objects.get(pk=object_id)
+	if canEditLarp(aLarp,request.user):
+		pass
+	else:
+		return HttpResponseRedirect(aLarp.get_absolute_url())
+	if request.method == "POST":
+		form = LarpForm(request.POST,instance=aLarp)
+		if form.is_valid():
+			run=form.save()
+			return HttpResponseRedirect(run.get_absolute_url())
+	else:
+		form = LarpForm(instance=aLarp)
+	return render_to_response('eventCRUD/larp_edit.html', {
+		'form':form
+		},
+		context_instance=RequestContext(request)
+	)
+
+@login_required
 def run_add(request, object_id):
 	"""
 	FIXME
@@ -140,7 +193,7 @@ def run_add(request, object_id):
 	@type object_id:
 	"""
 	larp = get_object_or_404(Larp, pk=object_id)
-	aRun = Run(larp=larp)
+	aRun = Run(larp=larp,creator=request.user)
 	if request.method == "POST":
 		form = RunForm(request.POST,instance=aRun)
 		if form.is_valid():
@@ -149,10 +202,39 @@ def run_add(request, object_id):
 	else:
 		form = RunForm()
 		form.larp=object_id
-	
 	return render_to_response('eventCRUD/run_add.html', {
 		'form':form, 
 		'larp':larp,
+		},
+		context_instance=RequestContext(request)
+	)
+
+
+@login_required
+def run_edit(request, object_id):
+	"""
+	FIXME
+	@param request:
+	@type request:
+	@param object_id:
+	@type object_id:
+	"""
+	aRun = Run.objects.get(pk=object_id)
+	if canEditRun(aRun,request.user):
+		pass
+	else:
+		return HttpResponseRedirect(aRun.get_absolute_url())
+	if request.method == "POST":
+		form = RunForm(request.POST,instance=aRun)
+		if form.is_valid():
+			run=form.save()
+			return HttpResponseRedirect(run.get_absolute_url())
+	else:
+		form = RunForm(instance=aRun)
+		form.larp=object_id
+	return render_to_response('eventCRUD/run_edit.html', {
+		'form':form, 
+		'larp':aRun.larp
 		},
 		context_instance=RequestContext(request)
 	)
@@ -172,24 +254,17 @@ def run_add_cast(request, run_id):
 		form = PlayerForm(request.POST, instance=aPlayer)
 		if form.is_valid():
 			if request.POST['character']:
-				print 'char:'
-				print request.POST['character']
 				aChar=get_object_or_404(Character, pk=request.POST['character'])
 			else:
-				print 'huh?'
-				print request.POST['character']
-				print request.POST['characterName']
 				if request.POST["characterName"]!="":
 					aChar=Character(larp=run.larp, name=request.POST["characterName"])
 					aChar.save()
 				else:
-					print 'aChar is False'
 					aChar=False
 			if aChar:
 				aPlayer=Player(run=run, user=request.user, character=aChar, characterName=request.POST['characterName'])
 				aPlayer.save()
 			else:
-				print 'character name is empty'
 				aPlayer=Player(run=run, user=request.user)
 				aPlayer.save()
 			return HttpResponseRedirect(run.get_absolute_url())
@@ -490,7 +565,7 @@ def location_add(request):
 def convention_add(request):
 	"""
 	FIXME
-	@param request:
+	@param request:request.user
 	@type request:
 	"""
 	if request.method == "POST":

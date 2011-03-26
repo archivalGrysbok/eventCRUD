@@ -203,6 +203,7 @@ class Run(models.Model):
 	larp = models.ForeignKey(Larp,)
 	tentative = models.BooleanField(default=False)
 	public = models.BooleanField(default=True)
+	creator= models.ForeignKey(User, blank=True, null=True,)
 	gm = models.ManyToManyField(User, blank=True, null=True, through="GM",  related_name="gms")
 	player = models.ManyToManyField(User, blank=True, null=True, through="Player", related_name="players")
 	npc = models.ManyToManyField(User, blank=True, null=True, through="NPC",  related_name="npcs")
