@@ -16,7 +16,7 @@ class LarpForm(ModelForm):
 	required_css_class = 'required'
 	class Meta:
 		model=Larp
-		exclude = ('larpseries','author')
+		exclude = ('larpseries','author','creator')
 	spoilerability  = forms.CharField(max_length=3,
                 widget=forms.Select(choices=Larp.SPOILERABILITY_CHOICES), help_text="")
 

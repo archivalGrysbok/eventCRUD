@@ -121,7 +121,8 @@ class Larp(models.Model):
 		('wl', 'weekend-long'),
 	)
 	unit = models.CharField(max_length=2, choices=LENGTH_UNIT_CHOICES,null=True, blank=True)
-	author = models.ManyToManyField(User, blank=True, null=True, through="Author",)
+	author = models.ManyToManyField(User, blank=True, null=True, through="Author",related_name="authors")
+	creator= models.ForeignKey(User, blank=True, null=True, related_name="creators")
 #	def save(self, **kwargs):
 #		self.slug = slugify(self.title)
 #		super(Larp, self).save(**kwargs)

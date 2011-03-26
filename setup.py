@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='eventCRUD',
-    version= '0.8.0.4.9.27',
+    version= '0.8.0.4.9.32',
     description='LARP event management for the Django web framework',
     author='Stacy Haponik',
     author_email='stacy.haponik@gmail.com',

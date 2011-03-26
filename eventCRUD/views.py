@@ -38,8 +38,6 @@ def canEditLarp(aLarp, aUser):
 		return True
 	return False
 
-
-
 # Create your views here.
 
 def run_detail(request, id):
@@ -67,7 +65,7 @@ def run_detail(request, id):
 						"player_list":Player.objects.filter(run=id),
 						},
 		)
-			
+
 def larp_detail(request, object_id):
 	"""
 	FIXME
@@ -142,14 +140,14 @@ def larp_add(request):
 	@param request:
 	@type request:
 	"""
+	aLarp = Larp(creator=request.user)
 	if request.method == "POST":
-		form = LarpForm(request.POST)
+		form = LarpForm(request.POST, instance=aLarp)
 		if form.is_valid():
 			larp=form.save()
 			return HttpResponseRedirect(larp.get_absolute_url())
 	else:
 		form = LarpForm()
-	
 	return render_to_response('eventCRUD/larp_add.html', {
 		'form':form, 
 		},
@@ -178,7 +176,8 @@ def larp_edit(request, object_id):
 	else:
 		form = LarpForm(instance=aLarp)
 	return render_to_response('eventCRUD/larp_edit.html', {
-		'form':form
+		'form':form,
+		'larp':aLarp
 		},
 		context_instance=RequestContext(request)
 	)
