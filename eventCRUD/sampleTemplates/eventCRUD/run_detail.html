@@ -138,6 +138,13 @@
 <p><input type="submit" value="Add me as a GM" /></p>
 </form>
 
+	{% ifequal user run.creator %}
+
+	<FORM METHOD="LINK" ACTION="/run/{{run.id}}/edit/">
+	<p><INPUT TYPE="submit" VALUE="Edit this run"></p>
+	</FORM>
+
+	{% endifequal %}
 
 {% endif %}
 
