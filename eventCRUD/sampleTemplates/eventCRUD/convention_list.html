@@ -1,0 +1,36 @@
+{% extends "base_home.html" %}
+
+{% load markup %}
+
+{% block title %}
+{% endblock %}
+
+{% block subhead %}
+{% endblock subhead %}
+
+{% block content %}
+
+<ul>
+{% for item in convention_list %}
+<li><a href="{{item.get_absolute_url}}">{{item}}</a></li>
+{% endfor %}
+</ul>
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% if user.is_authenticated %}
+
+<form method="get" action="/conventions/add/">
+	{% csrf_token %}
+	<p><input type="submit" value="Add a Convention" /></p>
+</form>
+
+<form method="get" action="/locations/add/">
+	{% csrf_token %}
+	<p><input type="submit" value="Add a Location" /></p>
+</form>
+{% endif %}
+
+{% endblock sidebar %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add a location
+{% endblock %}
+
+{% block subhead %}
+{% endblock subhead %}
+
+{% block content %}
+
+
+<form method="post" action="">
+{% csrf_token %}
+<table>
+    {{ form.as_table }}
+</table>
+<p><input type="submit" value="Add Location" /></p>
+</form>
+
+
+{% endblock %}
+
+{% block sidebar %}
+
+{% endblock sidebar %}
