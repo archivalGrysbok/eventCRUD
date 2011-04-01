@@ -24,9 +24,9 @@ class RunForm(ModelForm):
 	error_css_class = 'error'
 	required_css_class = 'required'
 #	name = CharField(help_text='Usually blank (the title of the Larp will be used instead).', required=False)
-	startdate = DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 10, datetime.date.today().year + 2 )), label='Start Date', required=False)
+	startdate = DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 20, datetime.date.today().year + 2 )), label='Start Date', required=False)
 	starttime = TimeField(label='Start Time', required=False, input_formats=valid_time_formats)
-	enddate=DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 10, datetime.date.today().year + 2 )), label='End Date', required=False)
+	enddate=DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 20, datetime.date.today().year + 2 )), label='End Date', required=False)
 	endtime = forms.TimeField(required=False, help_text='ex: 10:30am', input_formats=valid_time_formats)
 	past = BooleanField(help_text="Please check this box if the run occured in the past, but you are unsure of the date", required=False)
 	class Meta:
@@ -72,6 +72,9 @@ class UserProfileForm(ModelForm):
 class ConventionForm(ModelForm):
 	error_css_class = 'error'
 	required_css_class = 'required'
+	startdate = DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 20, datetime.date.today().year + 2 )), label='Start Date', required=False)
+	enddate=DateField(widget=SelectDateWidget(years=range(datetime.date.today().year - 20, datetime.date.today().year + 2 )), label='End Date', required=False)
+
 	class Meta:
 		model=Convention
 

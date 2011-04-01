@@ -273,10 +273,10 @@ def run_add_cast(request, run_id):
 		if run.is_past:
 			form.fields["character"].queryset = Character.objects.filter(larp=run.larp)
 		else:
-			if run.larp.spoilerability != 'ch':
-				form.fields["character"].queryset = Character.objects.filter(larp=run.larp).filter(spoiler=False)
-			else:
+			if run.larp.spoilerability == 'ch':
 				form.fields["character"].queryset = Character.objects.none()
+			else:
+				form.fields["character"].queryset = Character.objects.filter(larp=run.larp, spoiler=False)
 	return render_to_response('eventCRUD/cast_add.html', {
 		'form':form, 
 		'run':run,
