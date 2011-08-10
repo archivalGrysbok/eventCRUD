@@ -61,20 +61,16 @@ class Location(models.Model):
 	country = models.CharField(max_length=135, blank=True, null=True)
 	def __unicode__(self):
 		value=""
-		prev=0
+		locList=[]
 		if self.name:			#todo: pretify this
-			value = value+u'%s' % (self.name)
-			prev=1
+			locList.append(self.name)
 		if self.city:
-			if prev==1:
-				value=value+u', '
-			value = value+u'%s' % (self.city)
-		else:
-			prev=0
+			locList.append(self.city)
 		if self.state:
-			if prev==1:
-				value=value+u', '
-			value = value+u'%s' % (self.state)
+			locList.append(self.state)
+		if self.country:
+			locList.append(self.country)
+		value=", ".join(locList)
 		return value
 	class Meta:
 		ordering = ['name']
